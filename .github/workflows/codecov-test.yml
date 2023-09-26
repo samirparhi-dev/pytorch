@@ -31,20 +31,31 @@ jobs:
           sudo apt-get update -y
           sudo apt-get install -y gcc
 
-      - name: Install dependencies for pytorch
-        run: |
-          python -m pip install --upgrade pip
-          pip install -r requirements.txt
+      - name: Install Tox
+        run: pip install tox
 
-      - name: Build pytorch
-        run: |
-          python setup.py build
 
-      # Add more steps as needed for your specific build process
-
-      - name: Run tests for pytorch
+      - name: Setup Env for pytorch
         run: |
-          python setup.py test
+          export USE_CUDA=0
+          export USE_CUDNN=0
+          export BUILD_CAFFE2=1
+
+      # - name: Install dependencies for pytorch
+      #   run: |
+      #     python -m pip install --upgrade pip
+      #     pip install -r requirements.txt
+
+      # - name: Build pytorch
+      #   run: |
+      #     python setup.py build
+
+      # - name: Run tests for pytorch
+      #   run: |
+      #     python setup.py test
+      
+      - name: Run Tox
+        run: tox
 
       - name: Upload coverage reports for pytorch to Codecov
         uses: codecov/codecov-action@v3

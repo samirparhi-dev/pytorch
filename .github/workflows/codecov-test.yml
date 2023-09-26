@@ -1,3 +1,4 @@
+
 name: Build Pytorch Project and Test
 on:
   push:
@@ -40,7 +41,7 @@ jobs:
           pip install -U pytest
           pytest --version
 
-      # - name: Install Tox
+      # - name: Install Tox for testing pytorch
       #   run: pip install tox
 
       - name: Setup Env for pytorch
@@ -55,18 +56,18 @@ jobs:
           pip install -r requirements.txt
           pip install torch
 
-      # - name: Build pytorch
-      #   run: |
-      #     python setup.py build
+      - name: Build pytorch
+        run: |
+          python setup.py build
 
-      # - name: Run tests for pytorch
+      # - name: Run tests for pytorch using setup.py
       #   run: |
       #     python setup.py test
       
-      # - name: Run Tox
+      # - name: Run tests for pytorch using Tox
       #   run: tox
 
-      - name: Run Pytest
+      - name: Run Run tests for pytorch using Pytest
         run: pytest
 
       - name: Upload coverage reports for pytorch to Codecov

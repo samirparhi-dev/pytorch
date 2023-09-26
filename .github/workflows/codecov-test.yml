@@ -31,15 +31,22 @@ jobs:
           sudo apt-get update -y
           sudo apt-get install -y gcc
 
-      - name: Install Tox
-        run: pip install tox
+      - name: Install Pytest
+        run: |
+          pip install -U pytest
+          pytest --version
 
+      # - name: Install Tox
+      #   run: pip install tox
 
       - name: Setup Env for pytorch
         run: |
           export USE_CUDA=0
           export USE_CUDNN=0
           export BUILD_CAFFE2=1
+
+      - name: Print Env
+        run: printenv
 
       # - name: Install dependencies for pytorch
       #   run: |
@@ -54,8 +61,10 @@ jobs:
       #   run: |
       #     python setup.py test
       
-      - name: Run Tox
-        run: tox
+      # - name: Run Tox
+      #   run: tox
+      - name: Run Pytest
+        run: pytest
 
       - name: Upload coverage reports for pytorch to Codecov
         uses: codecov/codecov-action@v3

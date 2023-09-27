@@ -64,9 +64,9 @@ jobs:
           pip install --upgrade torch
           conda update pytorch torchvision torchaudio -c pytorch
 
-      - name: Build pytorch
-        run: |
-          python setup.py build
+      # - name: Build pytorch
+      #   run: |
+      #     python setup.py build
 
       # - name: Run tests for pytorch using setup.py
       #   run: |
